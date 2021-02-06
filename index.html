@@ -16,6 +16,7 @@
     </header>
 
     <main class="container">
+
       <section id="balance">
         <h2 class="sr-only">Balanço</h2>
 
@@ -29,7 +30,7 @@
           <p id="incomeDisplay">R$0,00</p>
         </div>
 
-        <div class="card">
+        <div class="card second-card">
           <h3>
           <span>
             Saída
@@ -59,7 +60,7 @@
         class="button new"
         >+ Nova Transação</a>
 
-        <table id="data-table">
+        <table id="data-table" class="data-table-class">
           <thead>
             <tr>
               <th>Descrição</th>
@@ -126,8 +127,27 @@
         </div>
       </div>
     </div>
+    
+
+    <div class="dark-mode-button">
+      <p>Dark-mode</p>
+
+        <label class="switch">
+          <input type="checkbox" class="dark-mode-check-box" name="theme">
+          <span class="slider round" onclick="Utils.darkMode()"></span>
+        </label>
+    </div>
 
     <footer><p>dev.finance$</p></footer>
+
+    <section id="load-screen">
+      <div class="load-screen-overlay">
+        <div class="load-screen-spinner"></div>
+        <p class="load-screen-logo"><img src="./assets/logo.svg"></p>
+        <h1><p class="load-screen-text">Carregando...</p></h1>
+      </div>
+      <div class="fixed"></div>
+    </section>
 
     <script src="./scripts.js"></script>
   </body>

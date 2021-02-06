@@ -1,9 +1,11 @@
 const Modal = {
   open() {
     document.querySelector(".modal-overlay").classList.add("active");
+    document.querySelector(".modal").classList.add("active");
   },
   close() {
     document.querySelector(".modal-overlay").classList.remove("active");
+    document.querySelector(".modal").classList.remove("active");
   },
 }
 
@@ -15,6 +17,16 @@ const Storage = {
     set(transactions) {
         localStorage.setItem("dev.finances:transactions", JSON.
         stringify(transactions))
+    },
+    setDarkMode() {
+        let theme = localStorage.getItem("dev.finances:dark-mode")
+
+        if(theme === 'dark-theme') {
+            localStorage.setItem("dev.finances:dark-mode", 'light-theme')
+        }
+        else {
+            localStorage.setItem("dev.finances:dark-mode", 'dark-theme')
+        }
     }
 }
 
@@ -78,7 +90,7 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-              <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
+              <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" class="remove-transaction" alt="Remover transação">
             </td>
         `
 
@@ -104,14 +116,53 @@ const DOM = {
 
 const Utils = {
     formatAmount(value) {
-        value = Number(value.replace(/\,\./g, "")) * 100
-
-        return value
+        value = value * 100
+        return Math.round(value)
     },
 
     formatDate(date) {
         const splittedDate = date.split("-")
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+    },
+
+    darkMode() {
+        Utils.setDarkModeClass("body")
+        Utils.setDarkModeClass("header")
+        Utils.setDarkModeClass(".card")
+        Utils.setDarkModeClass(".card.second-card")
+        Utils.setDarkModeClass(".new")
+        Utils.setDarkModeClass(".data-table-class")
+        Utils.setDarkModeClass("footer")
+        Utils.setDarkModeClass(".dark-mode-button")
+
+        Utils.darkModeStorage()
+    },
+
+    setDarkModeClass(name) {
+        document.querySelector(name).classList.toggle("dark-mode")
+    },
+
+    showLoadScreen() {
+        document.querySelector(".load-screen-overlay").classList.toggle("active")
+        document.querySelector(".load-screen-text").classList.toggle("active")
+        document.querySelector(".load-screen-logo").classList.toggle("active")
+        document.querySelector(".load-screen-spinner").classList.toggle("active")
+
+        document.querySelector(".load-screen-overlay").classList.toggle("unactive")
+        document.querySelector(".load-screen-text").classList.toggle("unactive")
+        document.querySelector(".load-screen-logo").classList.toggle("unactive")
+        document.querySelector(".load-screen-spinner").classList.toggle("unactive")
+    },
+
+    darkModeStorage() {
+        const theme = document.querySelector(".new").className
+
+        if(theme.indexOf("dark-mode") != -1) {
+            localStorage.setItem("dev.finances:dark-mode", 'dark-theme')
+        }
+        else {
+            localStorage.setItem("dev.finances:dark-mode", 'light-theme')
+        }
     },
 
     formatCurrency(value) {
@@ -190,17 +241,39 @@ const Form = {
 }
 
 const App = {
-    init() {
+    init(type) {
+
         Transaction.all.forEach(DOM.addTransaction)
 
         DOM.updateBalance()
 
         Storage.set(Transaction.all)
+
+        const theme = localStorage.getItem("dev.finances:dark-mode")
+
+        if(type === "load") {
+            document.querySelector(".load-screen-overlay").classList.toggle("active")
+            document.querySelector(".load-screen-text").classList.toggle("active")
+            document.querySelector(".load-screen-logo").classList.toggle("active")
+            document.querySelector(".load-screen-spinner").classList.toggle("active")
+
+            setTimeout(Utils.showLoadScreen, 2000)
+        }
+
+        if(type !== 'reload') {
+            if(theme === 'dark-theme') {
+                const checkBox = document.querySelector(".dark-mode-check-box")
+
+                checkBox.checked = true
+                Utils.darkMode()
+            }
+        }
     },
     reload() {
         DOM.clearTransactions()
-        App.init()
+
+        App.init("reload")
     },
 }
 
-App.init()
+App.init("load")
