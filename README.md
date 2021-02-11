@@ -37,5 +37,8 @@ $ git clone https://github.com/JhonCavichioli/dev-finances.git
 $ cd dev-finances
 ```
 
+<h2>📄 Translation</h2>
+The translation of README.md is available at <a href="./README-en.md">README-en.md</a>.
+
 <h2>📝 Licença</h2>
 Esse projeto está sob a <a href="./LICENSE">licença MIT</a>. Veja o arquivo LICENSE para mais detalhes.
