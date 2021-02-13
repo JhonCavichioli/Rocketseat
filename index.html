@@ -9,6 +9,11 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
   </head>
   <body>
     <header>
@@ -42,15 +47,23 @@
 
         <div class="card total">
           <h3>
-          <span>
-            Total
-          </span>
-          <img src="./assets/total.svg" alt="Image de entradas">
+            <div class="total-display">
+              <span>
+                Total
+              </span>
+              <img src="./assets/hide.png" width="32px" height="32px" alt="Ocultar saldo" class="hide-button" onclick="Transaction.hideAmount()">
+              <img src="./assets/total.svg" alt="Image de entradas">
+          </div>
           </h3>
           <p id="totalDisplay">R$0,00</p>
         </div>
 
       </section>
+
+      <div id="chart_div"></div>
+      <div class="chart_div_help">
+        O histórico das suas transações ficam aqui.
+      </div>
 
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
@@ -63,9 +76,21 @@
         <table id="data-table" class="data-table-class">
           <thead>
             <tr>
-              <th>Descrição</th>
-              <th>Valor</th>
-              <th>Data</th>
+              <th>Descrição
+                <div class="sort description" onclick="OrderBy.orderDescription()">
+                  <p onclick="OrderBy.orderDescription()">Sort<p>
+                </div>
+              </th>
+              <th>
+                Valor
+              <div class="sort amount">
+                  <p onclick="OrderBy.orderAmount()">Sort<p>
+                </div></th>
+              <th>
+                Data
+              <div class="sort data">
+                  <p onclick="OrderBy.orderDate()">Sort<p>
+                </div></th>
               <th>
             </tr>
           </thead>
@@ -127,7 +152,6 @@
         </div>
       </div>
     </div>
-    
 
     <div class="dark-mode-button">
       <p>Dark-mode</p>
@@ -138,7 +162,15 @@
         </label>
     </div>
 
-    <footer><p>dev.finance$</p></footer>
+    <footer>
+      <div class="github-logo">
+        <a href="https://github.com/JhonCavichioli/Rocketseat">
+        <img src="./assets/github.png" width="48px" height="48px">
+      </a>
+      </div>
+      <p>dev.finance$</p>
+      <p>Made with love</p>
+    </footer>
 
     <section id="load-screen">
       <div class="load-screen-overlay">
@@ -149,6 +181,23 @@
       <div class="fixed"></div>
     </section>
 
+    <!-- <div class="card graphics">
+      <h3>
+      <span>
+        Histórico
+      </span>
+      </h3>
+      <div class="graphics-canvas">
+        <canvas id="myChart"></canvas>
+      </div>
+      <p id="totalDisplay">
+      </p>
+    </div> -->
+
+    <!-- <div id="curve_chart"></div> -->
+    
+
     <script src="./scripts.js"></script>
+    <!-- <script src="./graphics.js"></script> -->
   </body>
 </html>

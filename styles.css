@@ -13,6 +13,57 @@
     --dark: rgb(32, 32, 36);
     --grey: rgb(42, 42, 46);
   }
+
+  #chart_div {
+    display: inline-block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border-width: 0;
+    width: 0;
+    padding: 0;
+    height: 0;
+    margin-left: -27rem;
+  }
+
+  .chart_div_help {
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: black;
+    display: inline-block;
+    position: absolute;
+    width: 200px;
+    margin-left: -22rem;
+    margin-top: 3rem;
+  }
+
+  .chart_div_help.dark-mode {
+    transition-property: color;
+    transition-duration: 0.5s;
+    color: white;
+  }
+
+  .chart_div_help.active {
+    opacity: 0;
+  }
+
+  .sort {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--green);
+  }
+
+  .hide-button {
+    cursor: pointer;
+    margin-left: 6rem;
+  }
+
+  .total-display {
+    display: grid;
+    grid-template-columns: 15fr 1fr 1fr;
+  }
   
   /* Body */
   
@@ -27,6 +78,8 @@
   }
   
   body {
+    transition-property: background;
+    transition-duration: 0.5s;
     background: var(--bg);
     font-family: "Poppins", sans-serif;
   }
@@ -41,6 +94,11 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+
+  #totalDisplay {
+    transition-property: content;
+    transition-duration: 0.5s;
   }
   
   /* Titulos */
@@ -85,6 +143,8 @@
   }
   
   .button.new {
+    transition-property: color;
+    transition-duration: 0.5s;
     display: inline-block;
     margin-bottom: 0.8rem;
   }
@@ -116,9 +176,9 @@
   /* Header */
   
   header {
-    animation-name: header-light-mode;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
+    transition-property: background;
+    transition-duration: 0.5s;
+    background: #2d4a22;
     padding: 2rem 0 10rem;
     text-align: center;
   }
@@ -143,6 +203,8 @@
     /* animation-name: card-light-mode;
       animation-duration: 0.5s;
       animation-fill-mode: forwards; */
+    transition-property: background;
+    transition-duration: 0.5s;
     background: white;
     padding: 1.5rem;
     border-radius: 0.25rem;
@@ -154,6 +216,10 @@
 
   
     margin-bottom: 2rem;
+  }
+
+  .card.graphics {
+    background: #f0f2f5;
   }
   
   .card h3 {
@@ -191,6 +257,8 @@
   }
   
   data-table-class.dark-mode {
+      transition-property: background;
+      transition-duration: 0.5s;
       background: black !important;
   }
   
@@ -276,7 +344,39 @@
     padding: 2.4rem;
     position: relative;
   
+    z-index: 901;
+  }
+
+  .modal.dark-mode {
+    background: #2a2a2e;
+    color: white;
+    padding: 2.4rem;
+    position: relative;
+  
     z-index: 1;
+  }
+
+  .modal.dark-mode h2 {
+    color: white;
+  }
+
+  .github-logo.dark-mode img {
+    cursor: pointer;
+    content: url("assets/github-light.png");
+  }
+
+  .github-logo {
+    display: inline-block;
+  }
+
+  .github-logo {
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    opacity: 0.4;
+  }
+
+  .github-logo:hover {
+    opacity: 1;
   }
   
   .modal.active {
@@ -346,6 +446,10 @@
     margin-top: 2rem;
     text-align: center;
   }
+
+  .card-graphics {
+    width: 200px;
+  }
   
   .dark-mode-button.dark-mode {
     color: white;
@@ -360,32 +464,33 @@
   }
   
   body.dark-mode {
-    animation-name: body-dark-mode;
-    animation-fill-mode: forwards;
-    animation-duration: 0.5s;
+    background: rgb(73, 70, 70);
+    transition-property: background;
+    transition-duration: 0.5s;
   }
   
   header.dark-mode {
-    animation-name: header-dark-mode;
-    animation-fill-mode: forwards;
-    animation-duration: 0.5s;
+    background: rgb(32, 32, 36);
+    transition-property: background;
+    transition-duration: 0.5s;
   }
   
   .card.dark-mode {
-    animation-name: card-dark-mode;
-    animation-fill-mode: forwards;
-    animation-duration: 0.5s;
+    background: rgb(42, 42, 46);
+    transition-property: background;
+    transition-duration: 0.5s;
     color: white;
   }
   
   .new.dark-mode {
+    transition-property: color;
+    transition-duration: 0.5s;
     color: white;
   }
   
   .data-table-class.dark-mode th {
-    animation-name: data-table-dark-mode;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
+    opacity: 0.8;
+    background: rgb(42, 42, 46);
   }
 
   .data-table-class.dark-mode td {
@@ -538,6 +643,36 @@
       gap: 2rem;
     }
   }
+
+  @media (max-width: 800px) {
+    #chart_div {
+      position: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 48.5%;
+      margin-top: 27rem;
+    }
+
+    .dark-mode-button {
+      margin-top: 19rem;
+    }
+  }
+
+  @media (max-width: 1500px) and (min-width: 800px) {
+    #chart_div {
+      position: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 30rem;
+      margin-top: 27rem;
+    }
+
+    .dark-mode-button {
+      margin-top: 19rem;
+    }
+  }
   
   @keyframes fade-front {
     from {
@@ -567,21 +702,6 @@
   
   /* Dark theme */
   
-  @keyframes body-dark-mode {
-    to {
-      background: rgb(73, 70, 70);
-    }
-  }
-  @keyframes header-dark-mode {
-    to {
-      background: rgb(32, 32, 36);
-    }
-  }
-  @keyframes card-dark-mode {
-    to {
-      background: rgb(42, 42, 46);
-    }
-  }
   @keyframes data-table-dark-mode {
     to {
       opacity: 0.8;
@@ -597,24 +717,8 @@
   
   /* Light theme */
   
-  @keyframes body-light-mode {
-    to {
-      background: #fff;
-    }
-  }
-  @keyframes header-light-mode {
-    to {
-      background: #2d4a22;
-    }
-  }
-  @keyframes card-light-mode {
-    to {
-      background: #fff;
-    }
-  }
   @keyframes data-table-light-mode {
     to {
       background: #fff;
     }
   }
-  
