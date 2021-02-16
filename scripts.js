@@ -1,3 +1,14 @@
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart)
+
+window.onresize = function() {
+    if(window.innerWidth > 1500) {
+        DOM.setGraphicPos('static')
+    } else {
+        DOM.setGraphicPos('dynamic')
+    }
+}
+
 function drawChart() {
 
     // Create the data table.
@@ -277,53 +288,44 @@ const OrderBy = {
     },
 
     orderAmount(){
-        oldDatas = []
-        if(Transaction.all.length != newDatas.length){
-            for(item of Transaction.all){
-                oldDatas.push(item)
-            }
-
-            for(item of Transaction.all){
-                newDatas.push(item)
-            }
-
-            newDatas.sort(function(a, b){
-                return parseFloat(b.amount) - parseFloat(a.amount);
-            }) 
-
-            if(JSON.stringify(Transaction.all) == JSON.stringify(newDatas)){ 
-                newDatas.sort(function(a, b){
-                    return parseFloat(a.amount) - parseFloat(b.amount);
-                }) 
-            }
+        const order = Storage.get()
+        let sorted = []
+        for(let i = 0; i < order.length; i++) {
+            sorted.push(order[i].amount)
         }
+        sorted.sort((a,b)=>b-a)
+        for(let i = 0; i < order.length; i++) {
+            order[i].amount = sorted[i]
+            Transaction.all[i].amount = sorted[i]
+        }
+
+        localStorage.setItem("dev.finances:transactions", JSON.
+        stringify(order))
+
+        App.reload()
     },
 
     orderDate(){
-        oldDatas = []
-        if(Transaction.all.length != newDatas.length){
-            for(item of Transaction.all){
-                oldDatas.push(item)
-            }
-
-            for(item of Transaction.all){
-                newDatas.push(item)
-            }
-
-            newDatas.sort(function(a, b){
-                var dateA = a.date.split('/').reverse().join(),
-                dateB = b.date.split('/').reverse().join();
-                return dateA > dateB ? -1 : (dateA > dateB ? 1 : 0);
-            }) 
-
-            if(JSON.stringify(Transaction.all) == JSON.stringify(newDatas)){ 
-                newDatas.sort(function(a, b){
-                    var dateA = a.date.split('/').reverse().join(),
-                    dateB = b.date.split('/').reverse().join();
-                    return dateA < dateB ? -1 : (dateA > dateB ? 1 : 0);
-                }) 
-            }
+        const order = Storage.get()
+        let sorted = []
+        for(let i = 0; i < order.length; i++) {
+            sorted.push(order[i].date)
         }
+        sorted.sort(function(a,b){
+            var da = new Date(a).getTime();
+            var db = new Date(b).getTime();
+            
+            return da < db ? 1 : da > db ? -1 : 0
+        });
+        for(let i = 0; i < order.length; i++) {
+            order[i].date = sorted[i]
+            Transaction.all[i].date = sorted[i]
+        }
+
+        localStorage.setItem("dev.finances:transactions", JSON.
+        stringify(order))
+
+        App.reload()
     }
 }
 
@@ -336,6 +338,28 @@ const DOM = {
         tr.dataset.index = index
 
         DOM.transactionsContainer.appendChild(tr)
+
+        window.innerWidth > 1500 ? DOM.setGraphicPos('static') : DOM.setGraphicPos('dynamic')
+    },
+
+    setGraphicPos(type) {
+        const graphic = document.getElementById("chart_div")
+        const graphicAbout = document.querySelector(".chart_div_help")
+        if(type === 'static') {
+            graphic.style.marginTop = `-${5 * Transaction.all.length}rem`
+            graphicAbout.style.marginTop = `3rem`
+            graphicAbout.style.marginLeft = `4.8rem`
+        }
+        else if(type === 'dynamic' && window.innerWidth > 800 && window.innerWidth < 1500) {
+            graphic.style.marginTop = "10rem"
+            graphicAbout.style.marginTop = `4rem`
+            graphicAbout.style.marginLeft = `40%`
+        }
+        else {
+            graphic.style.marginTop = "2rem"
+            graphicAbout.style.marginTop = `4.5rem`
+            graphicAbout.style.marginLeft = `34.5%`
+        }
     },
 
     innerHTMLTransaction(transaction, index) {
@@ -543,26 +567,24 @@ const App = {
 
         DOM.updateBalance()
 
-        Storage.set(Transaction.all)
-
-        if(newDatas.length != 0){
-            if (JSON.stringify(Transaction.all) !== JSON.stringify(newDatas)){
-                Transaction.all = newDatas
-                newDatas = []
-            }
-            else{
-                newDatas = []
-            }
-        }
-
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart)
+
+        Storage.set(Transaction.all) 
 
         const hide = localStorage.getItem("dev.finances:hide")
 
         const total = document.getElementById("totalDisplay")
 
         hide === 'hide' ? total.innerHTML = "Saldo oculto" : total.innerHTML = Utils.formatCurrency(Transaction.total())
+
+        if(window.innerWidth > 1500) {
+            console.log("Teste")
+            DOM.setGraphicPos('static')
+        } else {
+            console.log("Teste 2")
+            DOM.setGraphicPos('dynamic')
+        }
 
         let theme = localStorage.getItem("dev.finances:dark-mode")
 

@@ -16,16 +16,12 @@
 
   #chart_div {
     display: inline-block;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    border-width: 0;
     width: 0;
-    padding: 0;
     height: 0;
-    margin-left: -27rem;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    margin-top: -5rem;
   }
 
   .chart_div_help {
@@ -35,8 +31,8 @@
     display: inline-block;
     position: absolute;
     width: 200px;
-    margin-left: -22rem;
-    margin-top: 3rem;
+    margin-left: 4.8rem;
+    margin-top: -2rem;
   }
 
   .chart_div_help.dark-mode {
@@ -46,6 +42,15 @@
   }
 
   .chart_div_help.active {
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border-width: 0;
+    width: 0;
+    padding: 0;
+    height: 0;
+    margin-left: -27rem;
     opacity: 0;
   }
 
@@ -647,11 +652,12 @@
   @media (max-width: 800px) {
     #chart_div {
       position: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 48.5%;
-      margin-top: 27rem;
+      margin-left: 25%;
+    }
+
+    .chart_div_help {
+      margin-left: 40%;
+      margin-top: 21rem;
     }
 
     .dark-mode-button {
@@ -661,12 +667,11 @@
 
   @media (max-width: 1500px) and (min-width: 800px) {
     #chart_div {
-      position: auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: 30rem;
-      margin-top: 27rem;
+      margin-top: 2rem;
+      margin-left: 50%;
     }
 
     .dark-mode-button {
