@@ -2,6 +2,8 @@
 
 <p align="center"><a href="#sobre">Sobre</a> | <a href="#tecnologias">Tecnologias</a> | <a href="#funcionalidades">Funcionalidades</a> | <a href="#uso">Como usar</a></p>
 
+<img src="./assets/rocketseat.png">
+
 <h2>📌 Sobre</h2>
 <h3 id="sobre">🚀 O dev.finance$ é uma aplicação web de controle de finanças idealizada pela <a href="https://app.rocketseat.com.br/">Rocketseat</a> e desenvolvida por <a href="https://github.com/maykbrito">Mayk Brito</a>.</h3>
 
@@ -25,7 +27,13 @@
 <h2>🔧 Funcionalidades</h2>
 <strong id="funcionalidades">As seguintes funcionalidades foram adicionadas ao projeto:</strong>
 <p></p>
-<li> Dark-theme.
+<li> Dark-mode.
+<li> Possibilidade de ordernar as transações por ordem alfabética, valor e data.
+<li> Botão para remover todas as transações.
+<li> Possibilidade de filtrar apenas as entradas ou saídas.
+<li> Gráficos que mostram a porcentagem total das entradas e saídas.
+<li> Botão para ocultar saldo.
+<li> Tela de carregamento.
 
 <h2 id="uso">🗂 Como baixar o projeto</h2>
 
