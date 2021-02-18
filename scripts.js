@@ -458,6 +458,16 @@ const Utils = {
         document.querySelector(".load-screen-text").style.opacity = "0"
         document.querySelector(".load-screen-logo").style.opacity = "0"
         document.querySelector(".load-screen-spinner").style.opacity = "0"
+
+        document.querySelector(".load-screen-overlay").style.width = "0"
+        document.querySelector(".load-screen-text").style.width = "0"
+        document.querySelector(".load-screen-logo").style.width = "0"
+        document.querySelector(".load-screen-spinner").style.width = "0"
+
+        document.querySelector(".load-screen-overlay").style.height = "0"
+        document.querySelector(".load-screen-text").style.height = "0"
+        document.querySelector(".load-screen-logo").style.height = "0"
+        document.querySelector(".load-screen-spinner").style.height = "0"
     },
 
     darkModeStorage() {
