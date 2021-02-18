@@ -450,6 +450,7 @@ const Utils = {
         Utils.setDarkModeClass(".modal")
         Utils.setDarkModeClass(".github-logo")
         Utils.setDarkModeClass(".chart_div_help")
+        Utils.setDarkModeClass(".remove")
 
         Utils.darkModeStorage()
 

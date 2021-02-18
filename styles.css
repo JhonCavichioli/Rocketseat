@@ -26,11 +26,15 @@
 
 .buttons {
   display: grid;
-  grid-template-columns: 3.7fr 1fr;
+  grid-template-columns: 4.3fr 1fr;
 }
 
 .button.new {
   width: 150px;
+}
+
+.remove.dark-mode {
+  color: #fff;
 }
 
 .chart_div_help {
