@@ -25,7 +25,7 @@
       <section id="balance">
         <h2 class="sr-only">Balanço</h2>
 
-        <div class="card">
+        <div class="card first-card" onclick="OrderBy.incomes()">
           <h3>
             <span>
               Entradas
@@ -35,7 +35,7 @@
           <p id="incomeDisplay">R$0,00</p>
         </div>
 
-        <div class="card second-card">
+        <div class="card second-card" onclick="OrderBy.expenses()">
           <h3>
           <span>
             Saída
@@ -45,7 +45,7 @@
           <p id="expenseDisplay">R$0,00</p> 
         </div>
 
-        <div class="card total">
+        <div class="card total" onclick="OrderBy.total()">
           <h3>
             <div class="total-display">
               <span>
@@ -73,7 +73,7 @@
             <tr>
               <th>Descrição
                 <div class="sort description" onclick="OrderBy.orderDescription()">
-                  <p onclick="OrderBy.orderDescription()">Sort<p>
+                  <p onclick="OrderBy.orderDescription()">Sort</p>
                 </div>
               </th>
               <th>

@@ -223,6 +223,21 @@
     margin-bottom: 2rem;
   }
 
+  .card.second-card:hover {
+    cursor: pointer;
+    background: #262628;
+  }
+
+  .card.first-card:hover {
+    cursor: pointer;
+    background: #262628;
+  }
+
+  .card.total:hover {
+    cursor: pointer;
+    background: #42832a;
+  }
+
   .card.graphics {
     background: #f0f2f5;
   }
@@ -589,6 +604,13 @@
   .load-screen-overlay p {
       opacity: 0;
       color: white;
+  }
+
+  .load-screen-logo,
+  .load-screen-overlay,
+  .load-screen-text {
+    transition-property: opacity;
+    transition-duration: 1s;
   }
   
   .load-screen-text.active,

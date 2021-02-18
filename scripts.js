@@ -79,33 +79,6 @@ function drawChart() {
     chart.draw(data, options);
 }
 
-// function drawLineChart() {
-//   var data = google.visualization.arrayToDataTable([
-//     ['Data',        'Entradas',  'Saídas',   'Total'],
-//     ['2004',        1000,        400,       100],
-//     ['2005',        1170,        460,       500],
-//     ['2006',        660,         1120,      1000],
-//     ['2007',        1030,        540,       1500]
-//   ])
-//   var options = {
-//     title: 'Histórico de transações',
-//     curveType: 'function',
-//     legend: { position: 'bottom' }
-//   }
-//   var chart = new google.visualization.LineChart(document.getElementById('curve_chart'))
-//   chart.draw(data, options);
-// }
-
-function compare(a, b) {
-    if (a.last_nom < b.last_nom){
-      return -1;
-    }
-    if (a.last_nom > b.last_nom){
-      return 1;
-    }
-    return 0;
-}
-
 const Modal = {
   open() {
     document.querySelector(".modal-overlay").classList.add("active");
@@ -120,15 +93,6 @@ const Modal = {
 let expenseGraphicValue = []
 let incomeGraphicValue = []
 let totalGraphicValue = []
-
-let newDatas = []
-let oldDatas = []
-
-// Pegar as transações
-// Transformar em números
-// Ordenar
-// Setar
-// Reload
 
 if(localStorage.getItem("dev.finances:expenses") !== null) {
     expenseGraphicValue = localStorage.getItem("dev.finances:expenses")
@@ -175,24 +139,6 @@ const Storage = {
     }
 }
 
-function dynamicSort(property) {
-    var sortOrder = 1;
-
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-
-    return function (a,b) {
-        if(sortOrder == -1){
-            return b[property].localeCompare(a[property]);
-        }else{
-            return a[property].localeCompare(b[property]);
-        }        
-    }
-}
-
-
 const Transaction = {
     all: Storage.get(),
 
@@ -218,6 +164,11 @@ const Transaction = {
             removeTransaction.pop(removeTransaction.indexOf(index))
     
             localStorage.setItem("dev.finances:incomes", removeTransaction)
+        }
+
+        if(Transaction.all.length == 0) {
+            const graphicAbout = document.querySelector(".chart_div_help")
+            graphicAbout.style.opacity = "1"
         }
 
         App.reload();
@@ -262,29 +213,21 @@ const Transaction = {
 const OrderBy = {
     
     orderDescription(){
-        oldDatas = []
-        if(Transaction.all.length != newDatas.length){
-            
-            for(item of Transaction.all){
-                oldDatas.push(item)
-            }
-            
-            for(item of Transaction.all){
-                newDatas.push(item)
-            }
-            
-            newDatas.sort(function(a, b){
-                return a.description.toLowerCase().localeCompare(b.description.toLowerCase())
-               
-            })
-            
-            if(JSON.stringify(Transaction.all) == JSON.stringify(newDatas)){ 
-                newDatas.sort(function(a, b){
-                    return b.description.toLowerCase().localeCompare(a.description.toLowerCase())
-                }) 
-            }
-        
+        const order = Storage.get()
+        let sorted = []
+        for(let i = 0; i < order.length; i++) {
+            sorted.push(order[i].description)
         }
+        sorted.sort()
+        for(let i = 0; i < order.length; i++) {
+            order[i].description = sorted[i]
+            Transaction.all[i].description = sorted[i]
+        }
+
+        localStorage.setItem("dev.finances:transactions", JSON.
+        stringify(order))
+
+        App.reload()
     },
 
     orderAmount(){
@@ -326,6 +269,71 @@ const OrderBy = {
         stringify(order))
 
         App.reload()
+    },
+
+    incomes() {
+        DOM.clearTransactions()
+
+        let storage = Storage.get()
+        const graphic = document.getElementById("chart_div")
+        const graphicAbout = document.querySelector(".chart_div_help")
+
+        graphic.style.opacity = "0"
+        graphicAbout.style.opacity = "0"
+
+        Transaction.all.forEach(function(transaction, index) {
+            if(storage[index].amount > 0) {
+            DOM.addTransaction(transaction, index)
+            }
+        })
+
+        localStorage.setItem("dev.finances:only-incomes", true)
+        localStorage.setItem("dev.finances:only-expenses", false)
+
+        DOM.setGraphicPos()
+    },
+
+    expenses() {
+        DOM.clearTransactions()
+
+        let storage = Storage.get()
+
+        const graphic = document.getElementById("chart_div")
+        const graphicAbout = document.querySelector(".chart_div_help")
+
+        graphic.style.opacity = "0"
+        graphicAbout.style.opacity = "0"
+
+        Transaction.all.forEach(function(transaction, index) {
+            if(storage[index].amount < 0) {
+            DOM.addTransaction(transaction, index)
+            }
+        })
+
+        localStorage.setItem("dev.finances:only-incomes", false)
+        localStorage.setItem("dev.finances:only-expenses", true)
+    },
+
+    total() {
+        DOM.clearTransactions()
+
+        const graphic = document.getElementById("chart_div")
+        const graphicAbout = document.querySelector(".chart_div_help")
+
+        graphic.style.opacity = "1"
+        if(Transaction.all.length > 0) {
+            graphicAbout.style.opacity = "0"
+        }
+        else {
+            graphicAbout.style.opacity = "1"
+        }
+
+        Transaction.all.forEach(function(transaction, index){
+            DOM.addTransaction(transaction, index)
+        })
+
+        localStorage.setItem("dev.finances:only-incomes", false)
+        localStorage.setItem("dev.finances:only-expenses", false)
     }
 }
 
@@ -334,8 +342,11 @@ const DOM = {
 
     addTransaction(transaction, index) {
         const tr = document.createElement('tr')
+        const graphicAbout = document.querySelector(".chart_div_help")
         tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
         tr.dataset.index = index
+
+        graphicAbout.style.opacity = "0"
 
         DOM.transactionsContainer.appendChild(tr)
 
@@ -355,7 +366,7 @@ const DOM = {
             graphicAbout.style.marginTop = `4rem`
             graphicAbout.style.marginLeft = `40%`
         }
-        else {
+        else if(type === 'dynamic' && window.innerWidth < 800) {
             graphic.style.marginTop = "2rem"
             graphicAbout.style.marginTop = `4.5rem`
             graphicAbout.style.marginLeft = `34.5%`
@@ -421,14 +432,6 @@ const Utils = {
         Utils.setDarkModeClass(".github-logo")
         Utils.setDarkModeClass(".chart_div_help")
 
-        // let darkMode = localStorage.getItem("dev.finances:dark-mode")
-        // if(darkMode === 'dark-mode') {
-        //     document.querySelector(".github-logo").src='./assets/github-logo-light.png'
-        // }
-        // else {
-        //     document.querySelector(".github-logo").src='./assets/github-logo.png'
-        // }
-
         Utils.darkModeStorage()
 
         drawChart()
@@ -448,20 +451,13 @@ const Utils = {
         else {
             return totalGraphicValue
         }
-        // const graphicValue = localStorage.getItem("dev-finances:graphics")
-        // return graphicValue
     },
 
     showLoadScreen() {
-        document.querySelector(".load-screen-overlay").classList.toggle("active")
-        document.querySelector(".load-screen-text").classList.toggle("active")
-        document.querySelector(".load-screen-logo").classList.toggle("active")
-        document.querySelector(".load-screen-spinner").classList.toggle("active")
-
-        document.querySelector(".load-screen-overlay").classList.toggle("unactive")
-        document.querySelector(".load-screen-text").classList.toggle("unactive")
-        document.querySelector(".load-screen-logo").classList.toggle("unactive")
-        document.querySelector(".load-screen-spinner").classList.toggle("unactive")
+        document.querySelector(".load-screen-overlay").style.opacity = "0"
+        document.querySelector(".load-screen-text").style.opacity = "0"
+        document.querySelector(".load-screen-logo").style.opacity = "0"
+        document.querySelector(".load-screen-spinner").style.opacity = "0"
     },
 
     darkModeStorage() {
@@ -579,12 +575,16 @@ const App = {
         hide === 'hide' ? total.innerHTML = "Saldo oculto" : total.innerHTML = Utils.formatCurrency(Transaction.total())
 
         if(window.innerWidth > 1500) {
-            console.log("Teste")
             DOM.setGraphicPos('static')
         } else {
-            console.log("Teste 2")
             DOM.setGraphicPos('dynamic')
         }
+
+        document.querySelector(".load-screen-overlay").classList.add("active")
+        document.querySelector(".load-screen-text").classList.add("active")
+        document.querySelector(".load-screen-logo").classList.add("active")
+        document.querySelector(".load-screen-spinner").classList.add("active")
+        setTimeout(Utils.showLoadScreen, 1000)
 
         let theme = localStorage.getItem("dev.finances:dark-mode")
 
@@ -597,12 +597,6 @@ const App = {
                 Utils.darkMode()
             }
         }
-
-        document.querySelector(".load-screen-overlay").classList.toggle("active")
-        document.querySelector(".load-screen-text").classList.toggle("active")
-        document.querySelector(".load-screen-logo").classList.toggle("active")
-        document.querySelector(".load-screen-spinner").classList.toggle("active")
-        setTimeout(Utils.showLoadScreen, 1)
     },
 
     reload() {
