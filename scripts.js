@@ -17,11 +17,22 @@ function drawChart() {
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
     
-    data.addRows([
-    ['Entradas', Number(Transaction.incomes()/100)],
-    ['Saídas', Math.abs(Number(Transaction.expenses()/100))],
-    ['Total', Math.abs(Number(Transaction.total()/100))],
-    ]);
+    if(Transaction.total() < 0) {
+        data.addRows([
+            ['Entradas', Number(Transaction.incomes()/100)],
+            ['Saídas', Math.abs(Number(Transaction.expenses()/100))],
+            ['Total', 0],
+        ]);
+    }
+    else {
+        data.addRows([
+        ['Entradas', Number(Transaction.incomes()/100)],
+        ['Saídas', Math.abs(Number(Transaction.expenses()/100))],
+        ['Total', Math.abs(Number(Transaction.total()/100))],
+        ]);
+    }
+
+    
 
     // Set chart options
 
@@ -53,12 +64,12 @@ function drawChart() {
         'width':350,
         'backgroundColor': 'transparent',
         'legendTextStyle': {
-            color: '#000',
+            color: '#363f5f',
             fontName: 'Poppins',
             fontSize: 11,
         },
         'titleTextStyle': {
-            color: '#000',
+            color: '#363f5f',
             fontName: 'Poppins',
             fontSize: 18,
         },
@@ -88,6 +99,14 @@ const Modal = {
     document.querySelector(".modal-overlay").classList.remove("active");
     document.querySelector(".modal").classList.remove("active");
   },
+  openRemove() {
+    document.querySelector(".modal-overlay-remove").classList.add("active");
+    document.querySelector(".modal").classList.add("active");
+  },
+  closeRemove() {
+    document.querySelector(".modal-overlay-remove").classList.remove("active");
+    document.querySelector(".modal").classList.remove("active");
+  }
 }
 
 let expenseGraphicValue = []
@@ -543,6 +562,8 @@ const Form = {
     submit(event) {
         event.preventDefault()
 
+        console.log("Teste")
+
         try {
             Form.validateFields()
             const transaction = Form.formatValues()
@@ -554,6 +575,24 @@ const Form = {
         } catch(error) {
              alert(error.message)
         }
+    },
+
+    submitRemove(event) {
+        event.preventDefault()
+
+        Transaction.all = []
+
+        Modal.closeRemove()
+
+        document.querySelector(".chart_div_help").style.opacity = "1"
+        document.getElementById("chart_div").style.opacity = "1"
+
+        localStorage.setItem("dev.finances:only-incomes", false)
+        localStorage.setItem("dev.finances:only-expenses", false)
+
+        OrderBy.total()
+
+        App.reload()
     },
 
     saveGraphicValues() {

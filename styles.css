@@ -1,636 +1,661 @@
 :root {
-    /* Light theme */
-  
-    --dark-blue: #363f5f;
-    --green: #49aa26;
-    --light-green: #3dd705;
-    --red: #e92929;
-    --bg: #f0f2f5;
-  }
-  
-  .dark-mode:root {
-    --light-grey: rgb(73, 70, 70);
-    --dark: rgb(32, 32, 36);
-    --grey: rgb(42, 42, 46);
-  }
+  /* Light theme */
 
-  #chart_div {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    margin-top: -5rem;
-  }
+  --dark-blue: #363f5f;
+  --green: #49aa26;
+  --light-green: #3dd705;
+  --red: #e92929;
+  --bg: #f0f2f5;
+}
 
-  .chart_div_help {
-    transition-property: color;
-    transition-duration: 0.5s;
-    color: black;
-    display: inline-block;
-    position: absolute;
-    width: 200px;
-    margin-left: 4.8rem;
-    margin-top: -2rem;
-  }
+.dark-mode:root {
+  --light-grey: rgb(73, 70, 70);
+  --dark: rgb(32, 32, 36);
+  --grey: rgb(42, 42, 46);
+}
 
-  .chart_div_help.dark-mode {
-    transition-property: color;
-    transition-duration: 0.5s;
-    color: white;
-  }
+#chart_div {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  margin-top: -5rem;
+}
 
-  .chart_div_help.active {
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    border-width: 0;
-    width: 0;
-    padding: 0;
-    height: 0;
-    margin-left: -27rem;
-    opacity: 0;
-  }
+.buttons {
+  display: grid;
+  grid-template-columns: 3.7fr 1fr;
+}
 
-  .sort {
-    display: inline-block;
-    cursor: pointer;
-    color: var(--green);
-  }
+.button.new {
+  width: 150px;
+}
 
-  .hide-button {
-    cursor: pointer;
-    margin-left: 6rem;
-  }
+.chart_div_help {
+  transition-property: color;
+  transition-duration: 0.5s;
+  color: black;
+  display: inline-block;
+  position: absolute;
+  width: 200px;
+  margin-left: 4.8rem;
+  margin-top: -2rem;
+}
 
-  .total-display {
-    display: grid;
-    grid-template-columns: 15fr 1fr 1fr;
-  }
-  
-  /* Body */
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    font-size: 93.75%;
-  }
-  
-  body {
-    transition-property: background;
-    transition-duration: 0.5s;
-    background: var(--bg);
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
+.chart_div_help.dark-mode {
+  transition-property: color;
+  transition-duration: 0.5s;
+  color: white;
+}
 
-  #totalDisplay {
-    transition-property: content;
-    transition-duration: 0.5s;
-  }
-  
-  /* Titulos */
-  
-  h2 {
-    margin-top: 3.2rem;
-    margin-bottom: 0.8rem;
-    color: var(--dark-blue);
-  
-    font-weight: normal;
-  }
-  
-  a {
-    color: var(--green);
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: var(--light-green);
-  }
-  
-  /* Botões */
-  
-  button {
-    width: 100%;
-    height: 50px;
-  
-    border: none;
-  
-    color: white;
-    background: var(--green);
-  
-    padding: 0;
-  
-    border-radius: 0.25rem;
-  
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: var(--light-green);
-  }
-  
-  .button.new {
-    transition-property: color;
-    transition-duration: 0.5s;
-    display: inline-block;
-    margin-bottom: 0.8rem;
-  }
-  
-  .button.cancel {
-    color: var(--red);
-    border: 2px var(--red) solid;
-    border-radius: 0.25rem;
-  
-    height: 50px;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    opacity: 0.6;
-  }
-  
-  .button.cancel:hover {
-    opacity: 1;
-  }
-  
-  .container {
-    width: min(90vw, 800px);
-  
-    margin: auto;
-  }
-  
-  /* Header */
-  
-  header {
-    transition-property: background;
-    transition-duration: 0.5s;
-    background: #2d4a22;
-    padding: 2rem 0 10rem;
-    text-align: center;
-  }
-  
-  #logo {
-    color: #fff;
-    font-weight: 100;
-  }
-  
-  /* Transações */
-  
-  #balance {
-    margin-top: -8rem;
-  }
-  
-  #balance h2 {
-    color: white;
-    margin-top: 0;
-  }
-  
-  .card {
-    /* animation-name: card-light-mode;
+.chart_div_help.active {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border-width: 0;
+  width: 0;
+  padding: 0;
+  height: 0;
+  margin-left: -27rem;
+  opacity: 0;
+}
+
+.sort {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--green);
+}
+
+.hide-button {
+  cursor: pointer;
+  margin-left: 6rem;
+}
+
+.total-display {
+  display: grid;
+  grid-template-columns: 15fr 1fr 1fr;
+}
+
+/* Body */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 93.75%;
+}
+
+body {
+  transition-property: background;
+  transition-duration: 0.5s;
+  background: var(--bg);
+  font-family: "Poppins", sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+#totalDisplay {
+  transition-property: content;
+  transition-duration: 0.5s;
+}
+
+/* Titulos */
+
+h2 {
+  margin-top: 3.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-blue);
+
+  font-weight: normal;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+/* Botões */
+
+button {
+  width: 100%;
+  height: 50px;
+
+  border: none;
+
+  color: white;
+  background: var(--green);
+
+  padding: 0;
+
+  border-radius: 0.25rem;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--light-green);
+}
+
+.button.new {
+  transition-property: color;
+  transition-duration: 0.5s;
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.button.cancel {
+  color: var(--red);
+  border: 2px var(--red) solid;
+  border-radius: 0.25rem;
+
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.6;
+}
+
+.button.cancel:hover {
+  opacity: 1;
+}
+
+.container {
+  width: min(90vw, 800px);
+  margin: auto;
+}
+
+/* Header */
+
+header {
+  transition-property: background;
+  transition-duration: 0.5s;
+  background: #2d4a22;
+  padding: 2rem 0 10rem;
+  text-align: center;
+}
+
+#logo {
+  color: #fff;
+  font-weight: 100;
+}
+
+/* Transações */
+
+#balance {
+  margin-top: -8rem;
+}
+
+#balance h2 {
+  color: white;
+  margin-top: 0;
+}
+
+.card {
+  /* animation-name: card-light-mode;
       animation-duration: 0.5s;
       animation-fill-mode: forwards; */
-    transition-property: background;
-    transition-duration: 0.5s;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 0.25rem;
+  transition-property: background;
+  transition-duration: 0.5s;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
 
-    box-shadow: 1px 8px 5px -4px rgba(0,0,0,0.22);
-  -webkit-box-shadow: 1px 8px 5px -4px rgba(0,0,0,0.22);
-  -moz-box-shadow: 1px 8px 5px -4px rgba(0,0,0,0.22);
+  box-shadow: 1px 8px 5px -4px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 1px 8px 5px -4px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 1px 8px 5px -4px rgba(0, 0, 0, 0.22);
 
+  color: var(--dark-blue);
 
-  
-    margin-bottom: 2rem;
-  }
+  margin-bottom: 2rem;
+}
 
-  .card.second-card:hover {
-    cursor: pointer;
-    background: #262628;
-  }
+.card.second-card.dark-mode:hover {
+  cursor: pointer;
+  background: #262628;
+}
 
-  .card.first-card:hover {
-    cursor: pointer;
-    background: #262628;
-  }
+.card.first-card.dark-mode:hover {
+  cursor: pointer;
+  background: #262628;
+}
 
-  .card.total:hover {
-    cursor: pointer;
-    background: #42832a;
-  }
+.card.total.dark-mode:hover {
+  cursor: pointer;
+  background: #42832a;
+}
 
-  .card.graphics {
-    background: #f0f2f5;
-  }
-  
-  .card h3 {
-    font-weight: normal;
-    font-size: 1rem;
-  
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .card p {
-    font-size: 2rem;
-    line-height: 3rem;
-  
-    margin-top: 1rem;
-  }
-  
-  .card.total {
-    background: var(--green);
-    color: white;
-  }
-  
-  #transaction {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  #data-table {
-    width: 100%;
-    border-spacing: 0 0.5rem;
-    margin-top: 0.5rem;
-    color: #969cb3;
-  }
-  
-  data-table-class.dark-mode {
-      transition-property: background;
-      transition-duration: 0.5s;
-      background: black !important;
-  }
-  
-  table thead th:first-child,
-  table thead td:first-child {
-    border-radius: 0.25rem 0 0 0.25rem;
-  }
-  
-  table thead th:last-child,
-  table thead td:last-child {
-    border-radius: 0 0.25rem 0.25rem 0;
-  }
-  
-  table th {
-    background: white;
-    opacity: 0.6;
-  
-    font-weight: normal;
-    padding: 1rem 2rem;
-  
-    text-align: left;
-    color: #969cb3;
-  }
-  
-  table tbody td {
-    animation-name: data-table-light-mode;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  
-    padding: 1rem 2rem;
-    font-weight: normal;
-    color: #969cb3;
-  }
-  
-  td.description {
-    color: var(--dark-blue);
-  }
-  
-  td.income {
-    color: #12a454;
-  }
-  
-  td.expense {
-    color: #e92929;
-  }
-  
-  table tbody tr {
-    opacity: 0.7;
-  }
-  
-  table tr:hover {
-    opacity: 1;
-  }
-  
-  /* Modal */
-  
-  .modal-overlay {
-    width: 100%;
-    height: 100%;
-  
-    background-color: rgba(0, 0, 0, 0.7);
-  
-    position: fixed;
-    top: 0;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    opacity: 0;
-    visibility: hidden;
-  
-    z-index: 900;
-  }
-  
-  .modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .modal {
-    background: #f0f2f5;
-    padding: 2.4rem;
-    position: relative;
-  
-    z-index: 901;
-  }
+.card.second-card:hover {
+  cursor: pointer;
+  background: #dddddd;
+}
 
-  .modal.dark-mode {
-    background: #2a2a2e;
-    color: white;
-    padding: 2.4rem;
-    position: relative;
-  
-    z-index: 1;
-  }
+.card.first-card:hover {
+  cursor: pointer;
+  background: #dddddd;
+}
 
-  .modal.dark-mode h2 {
-    color: white;
-  }
+.card.total:hover {
+  cursor: pointer;
+  background: #42832a;
+}
 
-  .github-logo.dark-mode img {
-    cursor: pointer;
-    content: url("assets/github-light.png");
-  }
+.card.graphics {
+  background: #f0f2f5;
+}
 
-  .github-logo {
-    display: inline-block;
-  }
+.card h3 {
+  font-weight: normal;
+  font-size: 1rem;
 
-  .github-logo {
-    transition-property: opacity;
-    transition-duration: 0.5s;
-    opacity: 0.4;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .github-logo:hover {
-    opacity: 1;
-  }
-  
-  .modal.active {
-    animation-name: fade-front;
-    animation-duration: 0.5s;
-  }
-  
-  .remove-transaction {
-    cursor: pointer;
-  }
-  
-  #form {
-    max-width: 500px;
-  }
-  
-  #form h2 {
-    margin-top: 0;
-  }
-  
-  input {
-    border: none;
-    border-radius: 0.2rem;
-  
-    padding: 0.8rem;
-  
-    width: 100%;
-  }
-  
-  .input-group {
-    padding: 0.8rem;
-  }
-  
-  .input-group small {
-    opacity: 0.4;
-  }
-  
-  .input-group.actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .input-group.actions .button,
-  .input-group.actions button {
-    width: 48%;
-  }
-  
-  /* Footer */
-  
-  footer {
-    text-align: center;
-    padding: 4rem 0 2rem;
-    color: var(--dark-blue);
-  
-    opacity: 0.6;
-  }
-  
-  /* Dark mode */
-  
-  .dark-mode-button.light-mode {
-    opacity: 0.6;
-  }
-  
-  .dark-mode-button {
-    color: var(--dark-blue);
-    opacity: 0.8;
-    margin-top: 2rem;
-    text-align: center;
-  }
+.card p {
+  font-size: 2rem;
+  line-height: 3rem;
 
-  .card-graphics {
-    width: 200px;
-  }
-  
-  .dark-mode-button.dark-mode {
-    color: white;
-  }
-  
-  footer p {
-    color: var(--dark-blue);
-  }
-  
-  footer.dark-mode p {
-    color: white;
-  }
-  
-  body.dark-mode {
-    background: rgb(73, 70, 70);
-    transition-property: background;
-    transition-duration: 0.5s;
-  }
-  
-  header.dark-mode {
-    background: rgb(32, 32, 36);
-    transition-property: background;
-    transition-duration: 0.5s;
-  }
-  
-  .card.dark-mode {
-    background: rgb(42, 42, 46);
-    transition-property: background;
-    transition-duration: 0.5s;
-    color: white;
-  }
-  
-  .new.dark-mode {
-    transition-property: color;
-    transition-duration: 0.5s;
-    color: white;
-  }
-  
-  .data-table-class.dark-mode th {
-    opacity: 0.8;
-    background: rgb(42, 42, 46);
-  }
+  margin-top: 1rem;
+}
 
-  .data-table-class.dark-mode td {
-    animation-name: data-table-td-dark-mode;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  }
+.card.total {
+  background: var(--green);
+  color: white;
+}
 
-  .data-table-class.dark-mode td:first-child {
-    color: white;
-  }
-  
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #2196f3;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-  
-  .dark-mode-button label {
-    margin-top: 1.5rem;
-  }
-  
-  .load-screen-overlay.active {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: #2d4a22;
-  
-      overflow: hidden;
-  
-      opacity: 0.9;
-  
-      z-index: 998;
-  }
-  
-  .load-screen-overlay p {
-      opacity: 0;
-      color: white;
-  }
+#transaction {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
 
-  .load-screen-logo,
-  .load-screen-overlay,
-  .load-screen-text {
-    transition-property: opacity;
-    transition-duration: 1s;
-  }
-  
-  .load-screen-text.active,
-  .load-screen-logo.active {
-      position: relative;
-      margin-top: 20rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+#data-table {
+  width: 100%;
+  border-spacing: 0 0.5rem;
+  margin-top: 0.5rem;
+  color: #969cb3;
+}
 
-      opacity: 1;
+data-table-class.dark-mode {
+  transition-property: background;
+  transition-duration: 0.5s;
+  background: black !important;
+}
 
-      overflow: auto;
-  }
+table thead th:first-child,
+table thead td:first-child {
+  border-radius: 0.25rem 0 0 0.25rem;
+}
 
-  .load-screen-text.active {
-      margin-top: 1rem;
-  }
+table thead th:last-child,
+table thead td:last-child {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
 
-  /* .load-screen-spinner {
+table th {
+  background: white;
+  opacity: 0.6;
+
+  font-weight: normal;
+  padding: 1rem 2rem;
+
+  text-align: left;
+  color: #969cb3;
+}
+
+table tbody td {
+  animation-name: data-table-light-mode;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+
+  padding: 1rem 2rem;
+  font-weight: normal;
+  color: #969cb3;
+}
+
+td.description {
+  color: var(--dark-blue);
+}
+
+td.income {
+  color: #12a454;
+}
+
+td.expense {
+  color: #e92929;
+}
+
+table tbody tr {
+  opacity: 0.7;
+}
+
+table tr:hover {
+  opacity: 1;
+}
+
+/* Modal */
+
+.modal-overlay,
+.modal-overlay-remove {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  z-index: 900;
+}
+
+.modal-overlay.active,
+.modal-overlay-remove.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: #f0f2f5;
+  padding: 2.4rem;
+  position: relative;
+
+  z-index: 901;
+}
+
+.modal.dark-mode {
+  background: #2a2a2e;
+  color: white;
+  padding: 2.4rem;
+  position: relative;
+
+  z-index: 1;
+}
+
+.modal.dark-mode h2 {
+  color: white;
+}
+
+.github-logo.dark-mode img {
+  cursor: pointer;
+  content: url("assets/github-light.png");
+}
+
+.github-logo {
+  display: inline-block;
+}
+
+.github-logo {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  opacity: 0.4;
+}
+
+.github-logo:hover {
+  opacity: 1;
+}
+
+.modal.active {
+  animation-name: fade-front;
+  animation-duration: 0.5s;
+}
+
+.remove-transaction {
+  cursor: pointer;
+}
+
+#form {
+  max-width: 500px;
+}
+
+#form h2 {
+  margin-top: 0;
+}
+
+input {
+  border: none;
+  border-radius: 0.2rem;
+
+  padding: 0.8rem;
+
+  width: 100%;
+}
+
+.input-group {
+  padding: 0.8rem;
+}
+
+.input-group small {
+  opacity: 0.4;
+}
+
+.input-group.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+  width: 48%;
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  padding: 4rem 0 2rem;
+  color: var(--dark-blue);
+
+  opacity: 0.6;
+}
+
+/* Dark mode */
+
+.dark-mode-button.light-mode {
+  opacity: 0.6;
+}
+
+.dark-mode-button {
+  color: var(--dark-blue);
+  opacity: 0.8;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.card-graphics {
+  width: 200px;
+}
+
+.dark-mode-button.dark-mode {
+  color: white;
+}
+
+footer p {
+  color: var(--dark-blue);
+}
+
+footer.dark-mode p {
+  color: white;
+}
+
+body.dark-mode {
+  background: rgb(73, 70, 70);
+  transition-property: background;
+  transition-duration: 0.5s;
+}
+
+header.dark-mode {
+  background: rgb(32, 32, 36);
+  transition-property: background;
+  transition-duration: 0.5s;
+}
+
+.card.dark-mode {
+  background: rgb(42, 42, 46);
+  transition-property: background;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.new.dark-mode {
+  transition-property: color;
+  transition-duration: 0.5s;
+  color: white;
+}
+
+.data-table-class.dark-mode th {
+  opacity: 0.8;
+  background: rgb(42, 42, 46);
+}
+
+.data-table-class.dark-mode td {
+  animation-name: data-table-td-dark-mode;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.data-table-class.dark-mode td:first-child {
+  color: white;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.dark-mode-button label {
+  margin-top: 1.5rem;
+}
+
+.load-screen-overlay.active {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #2d4a22;
+
+  overflow: hidden;
+
+  opacity: 0.9;
+
+  z-index: 998;
+}
+
+.load-screen-overlay p {
+  opacity: 0;
+  color: white;
+}
+
+.load-screen-logo,
+.load-screen-overlay,
+.load-screen-text {
+  transition-property: opacity;
+  transition-duration: 1s;
+}
+
+.load-screen-text.active,
+.load-screen-logo.active {
+  position: relative;
+  margin-top: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 1;
+
+  overflow: auto;
+}
+
+.load-screen-text.active {
+  margin-top: 1rem;
+}
+
+/* .load-screen-spinner {
     border: 8px solid rgba(0, 0, 0, 0.1);
     border-left-color: #15db15;
     border-radius: 50%;
@@ -651,101 +676,105 @@
       opacity: 1;
   } */
 
-  div.fixed { position: fixed; top: 0; left: 0; }
+div.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  @media (min-width: 800px) {
-    html {
-      font-size: 87.5%;
-    }
-  
-    #balance {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
+}
+
+@media (min-width: 800px) {
+  html {
+    font-size: 87.5%;
   }
 
-  @media (max-width: 800px) {
-    #chart_div {
-      position: auto;
-      margin-left: 25%;
-    }
+  #balance {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
 
-    .chart_div_help {
-      margin-left: 40%;
-      margin-top: 21rem;
-    }
-
-    .dark-mode-button {
-      margin-top: 19rem;
-    }
+@media (max-width: 800px) {
+  #chart_div {
+    position: auto;
+    margin-left: 25%;
   }
 
-  @media (max-width: 1500px) and (min-width: 800px) {
-    #chart_div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2rem;
-      margin-left: 50%;
-    }
-
-    .dark-mode-button {
-      margin-top: 19rem;
-    }
-  }
-  
-  @keyframes fade-front {
-    from {
-      margin-left: -5rem;
-      opacity: 0.2;
-    }
-    to {
-      opacity: 1;
-      margin: 0;
-    }
-  }
-  
-  /* Animações */
-  
-  @keyframes fade-back {
-    to {
-      opacity: 0;
-      margin: -0.6rem;
-    }
+  .chart_div_help {
+    margin-left: 40%;
+    margin-top: 21rem;
   }
 
-  @keyframes fade {
-      to {
-          opacity: 0;
-      }
+  .dark-mode-button {
+    margin-top: 19rem;
   }
-  
-  /* Dark theme */
-  
-  @keyframes data-table-dark-mode {
-    to {
-      opacity: 0.8;
-      background: rgb(42, 42, 46);
-    }
+}
+
+@media (max-width: 1500px) and (min-width: 800px) {
+  #chart_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-left: 50%;
   }
-  @keyframes data-table-td-dark-mode {
-    to {
-      opacity: 0.8;
-      background: rgb(42, 42, 46);
-    }
+
+  .dark-mode-button {
+    margin-top: 19rem;
   }
-  
-  /* Light theme */
-  
-  @keyframes data-table-light-mode {
-    to {
-      background: #fff;
-    }
+}
+
+@keyframes fade-front {
+  from {
+    margin-left: -5rem;
+    opacity: 0.2;
   }
+  to {
+    opacity: 1;
+    margin: 0;
+  }
+}
+
+/* Animações */
+
+@keyframes fade-back {
+  to {
+    opacity: 0;
+    margin: -0.6rem;
+  }
+}
+
+@keyframes fade {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Dark theme */
+
+@keyframes data-table-dark-mode {
+  to {
+    opacity: 0.8;
+    background: rgb(42, 42, 46);
+  }
+}
+@keyframes data-table-td-dark-mode {
+  to {
+    opacity: 0.8;
+    background: rgb(42, 42, 46);
+  }
+}
+
+/* Light theme */
+
+@keyframes data-table-light-mode {
+  to {
+    background: #fff;
+  }
+}

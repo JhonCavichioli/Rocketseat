@@ -63,10 +63,17 @@
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
 
-        <a href="#"
-        onclick="Modal.open()"
-        class="button new"
-        >+ Nova Transação</a>
+        <div class="buttons">
+          <a href="#"
+          onclick="Modal.open()"
+          class="button new"
+          >+ Nova Transação</a>
+
+          <a href="#"
+          onclick="Modal.openRemove()"
+          class="button remove"
+          >Remover transações</a>
+        </div>
 
         <table id="data-table" class="data-table-class">
           <thead>
@@ -144,6 +151,24 @@
               <button>Salvar</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay-remove">
+      <div class="modal">
+        <div id="form">
+          <form action="" onsubmit="Form.submitRemove(event)">
+            <h2>Remover transações</h2>
+            Você tem certeza que deseja remover as transações? Essa ação é irreversível.
+            <div class="input-group actions">
+              <a
+              onclick="Modal.closeRemove()"
+              href="#"
+              class="button cancel">Cancelar</a>
+              <button>Confirmar</button>
+            </div>
+        </form>
         </div>
       </div>
     </div>
