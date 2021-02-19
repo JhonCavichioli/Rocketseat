@@ -15,7 +15,7 @@
 
 <strong><h3><p align="center">#NeverStopLearning 🚀</p></h3></strong>
 
-<h4 align="center">🚧 Projeto em desenvolvimento.</h4>
+<h4 align="center">🚧 Projeto finalizado.</h4>
 
 <h2>🛠 Tecnologias</h2>
 <strong><div id="tecnologias">As seguintes ferramentas foram usadas na construção do projeto:</div></strong>
@@ -23,6 +23,7 @@
 <li> <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">HTML</a>
 <li> <a href="https://www.w3schools.com/css/">CSS</a>
 <li> <a href="https://developer.mozilla.org/pt-BR/docs/Web/Javascript">JavaScript</a>
+<li> <a href="https://developers.google.com/chart">Google Charts</a>
 
 <h2>🔧 Funcionalidades</h2>
 <strong id="funcionalidades">As seguintes funcionalidades foram adicionadas ao projeto:</strong>
